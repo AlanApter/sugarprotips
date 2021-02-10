@@ -1,0 +1,28 @@
+Step 1:
+
+Make sure you can pull the pull request. You can do that by modifiying the git file to include the following line:
+        fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+		
+Step 2:
+git fetch origin
+git fetch --all
+
+Step 3:
+
+Checkout the pr. For example, for me this was:
+git checkout pr/3
+
+Step 4:
+
+latestcommit=$(git log --pretty=format:'%h' -n 1)
+git --no-pager diff --name-only $latestcommit $latestcommit~
+
+Step5:
+cp --parents `git --no-pager diff --name-only $latestcommit $latestcommit~` ../path/to/where/your/package/is
+
+Step 6:
+Add a manifest file
+
+Step 7:
+
+Package it up.
